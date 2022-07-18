@@ -9,8 +9,8 @@
 
 
 // Funciones a utilizar para encontrar puntos validos en los bordes de la matriz.
-int num_entradas(int m, int n, char **matriz);
-void puntos_inicio(int m, int n,  char **matriz , int *entrada_x, int *entrada_y);
+int num_entradas(int m, int n, int **matriz);
+void puntos_inicio(int m, int n,  int **matriz , int *entrada_x, int *entrada_y);
 
 
 

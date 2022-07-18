@@ -58,18 +58,18 @@ void contador(int *a, int *b){
 }
 
 // Funcion que reserva la memoria dinamica necesaria para la asignacion de valores, necesarios para contruir la matriz.
-int reservar_memoria (int filas, int colum){
+int **reservar_memoria (int filas, int colum){
 
 	int i;
-	char **matriz;
+	int **matriz;
 	
-	matriz = (char**)calloc(filas,sizeof(char*));
+	matriz = (int**)calloc(filas,sizeof(int*));
 	if (matriz == NULL){
 		printf("No se ha podido revervar memoria \n");
 		exit(1);
 	}
 	for(i = 0; i< filas; i++){
-		matriz[i] = (char*)calloc(colum,sizeof(char));
+		matriz[i] = (int*)calloc(colum,sizeof(int));
 		if (matriz == NULL){
 		printf("No se ha podido revervar memoria \n");
 		exit(1);
@@ -80,30 +80,37 @@ int reservar_memoria (int filas, int colum){
 
 
 // Funcion que asigna los valores correspondientes al archivo leido en la matriz dinamica creada.
-void introduce_valores(int filas, int colum, char **matriz){
+
+
+void introduce_valores(int filas, int colum, int **matriz){
 	FILE *laberinto;
-	laberinto = fopen("laberinto.txt", "r");
-	int i,j;
-	char recorido;
 	
-	for (i = 0; i < filas; i++){
-		for(j = 0 ; j < colum ; j++){
-			recorido = fgetc(laberinto);
-			if (recorido != EOF){
-				fscanf(laberinto, "%d" ,&matriz[i][j+1]);
-			}
+	laberinto = fopen("laberinto.txt", "r");
+	int i = 0,j = 0;
+	char recorrido;
+	recorrido = ' ';
+	while (recorrido != EOF){
+        recorrido = fgetc(laberinto); 
+        
+        if (i >= filas ){
+        	break;
 		}
-	}
+        if (j >= colum ){
+        	i++;
+        	j = 0;
+		}
+        
+     	if (isdigit(recorrido) ){
+				matriz[i][j] = atoi(&recorrido);
+				j++;
+		}
+    }
 	fclose(laberinto);
 }
 
 
-// LIBERACION DE LA MEMORIA DINAMICA
-  /*  for (i= 0; i<m; ++i)
-        free(matriz[i]);
-    free(matriz);
+    
 
-*/
 
 
 

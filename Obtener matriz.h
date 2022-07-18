@@ -13,7 +13,7 @@
 
 void contador(int *m, int *n);
 void validar_archivo();
-int reservar_memoria (int filas, int colum);
-void introduce_valores (int filas, int colum, char **mat);
+int** reservar_memoria (int filas, int colum);
+void introduce_valores (int filas, int colum, int **mat);
 
 #endif
